@@ -1,7 +1,0 @@
-['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']amp; Swae Lee', 'Halsey', 'Billie Eilish', 'Post Malone', 'Marshmello &amp; Bas', 'Ariana Grande', 'Khalid', 'Travis Scott', 'Jonas Brothers']
-['Old Town Road', 'Sunflower (Spider-Man: Into The Spider-Verse)', 'Without Me', 'Bad Guy', 'Wow.', 'Happier', '7 Rings', 'Talk', 'Sicko Mode', 'Sucker']
-
-
-['The Weeknd', 'Post Malone', 'Roddy Ricch', 'Dua Lipa', 'DaBaby Featuring Roddy ', 'Harry Styles', 'Future Featuring ', 'Maroon 5', 'Maren Morris', 'Lewis Capaldi']
-['Blinding Lights', 'Circles', 'The Box', "Don't Start Now", 'Rockstar', 'Adore You', 'Life Is Good', 'Memories', 'The Bones', 'Someone You Loved']
-
