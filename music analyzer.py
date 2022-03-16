@@ -7,7 +7,7 @@ from billboard_scraper import get_tonic
 def get_tonic(spreadsheet):
     tonic_c = 0
     tonic_dflat = 0
-    tonic_d = 0
+    tonic_d = 0 
     tonic_eflat = 0
     tonic_e = 0
     tonic_f = 0
@@ -72,6 +72,119 @@ def get_key_quality(spreadsheet):
             minor+=1
             qualities[cell.value] = minor
     return qualities
+
+def get_key_whole(spreadsheet):
+    cmajor = 0
+    dflatmajor = 0
+    dmajor = 0
+    eflatmajor = 0
+    emajor = 0
+    fmajor = 0
+    fsharpmajor = 0
+    gmajor = 0
+    aflatmajor = 0
+    amajor = 0
+    bflatmajor = 0
+    bmajor = 0
+    
+    cminor = 0
+    dflatminor = 0
+    dminor = 0
+    eflatminor = 0
+    eminor = 0
+    fminor = 0
+    fsharpminor = 0
+    gminor = 0
+    aflatminor = 0
+    aminor = 0
+    bflatminor = 0
+    bminor = 0
+    keys = {}
+    
+    for j in range(10):
+        cell_tonic = spreadsheet.cell(row = 7, column = j+2)
+        cell_quality = spreadsheet.cell(row = 8, column = j+2)
+        full_key = str(cell_tonic.value) + " " + str(cell_quality.value)
+        #major keys
+        if str(full_key) not in keys:                
+                keys[str(full_key)] = 0
+        if(str(full_key).lower() == "C Major".lower()):
+            cmajor += 1
+            keys[str(full_key)] = cmajor
+        if(str(full_key).lower() == "Db Major".lower()):
+            dflatmajor += 1
+            keys[str(full_key)] = dflatmajor
+        if(str(full_key).lower() == "D Major".lower()):
+            dmajor += 1
+            keys[str(full_key)] = dmajor
+        if(str(full_key).lower() == "Eb Major".lower()):
+            eflatmajor += 1
+            keys[str(full_key)] = eflatmajor
+        if(str(full_key).lower() == "E Major".lower()):
+            emajor += 1
+            keys[str(full_key)] = emajor
+        if(str(full_key).lower() == "F Major".lower()):
+            fmajor += 1
+            keys[str(full_key)] = fmajor
+        if(str(full_key).lower() == "F# Major".lower()):
+            fsharpmajor += 1
+            keys[str(full_key)] = fsharpmajor
+        if(str(full_key).lower() == "G Major".lower()):
+            gmajor += 1
+            keys[str(full_key)] = gmajor
+        if(str(full_key).lower() == "Ab Major".lower()):
+            aflatmajor += 1
+            keys[str(full_key)] = aflatmajor
+        if(str(full_key).lower() == "A Major".lower()):
+            amajor += 1
+            keys[str(full_key)] = amajor
+        if(str(full_key).lower() == "Bb Major".lower()):
+            bflatmajor += 1
+            keys[str(full_key)] = bflatmajor
+        if(str(full_key).lower() == "B Major".lower()):
+            bmajor += 1
+            keys[str(full_key)] = bmajor
+        
+        #minor keys
+        if str(full_key) not in keys:                
+                keys[str(full_key)] = 0
+        if(str(full_key).lower() == "C Minor".lower()):
+            cminor += 1
+            keys[str(full_key)] = cminor
+        if(str(full_key).lower() == "Db Minor".lower()):
+            dflatminor += 1
+            keys[str(full_key)] = dflatminor
+        if(str(full_key).lower() == "D Minor".lower()):
+            dminor += 1
+            keys[str(full_key)] = dminor
+        if(str(full_key).lower() == "Eb Minor".lower()):
+            eflatminor += 1
+            keys[str(full_key)] = eflatminor
+        if(str(full_key).lower() == "E Minor".lower()):
+            eminor += 1
+            keys[str(full_key)] = eminor
+        if(str(full_key).lower() == "F Minor".lower()):
+            fminor += 1
+            keys[str(full_key)] = fminor
+        if(str(full_key).lower() == "F# Minor".lower()):
+            fsharpminor += 1
+            keys[str(full_key)] = fsharpminor
+        if(str(full_key).lower() == "G Minor".lower()):
+            gminor += 1
+            keys[str(full_key)] = gminor
+        if(str(full_key).lower() == "Ab Minor".lower()):
+            aflatminor += 1
+            keys[str(full_key)] = aflatminor
+        if(str(full_key).lower() == "A Minor".lower()):
+            aminor += 1
+            keys[str(full_key)] = aminor
+        if(str(full_key).lower() == "Bb Minor".lower()):
+            bflatminor += 1
+            keys[str(full_key)] = bflatminor
+        if(str(full_key).lower() == "B Minor".lower()):
+            bminor += 1
+            keys[str(full_key)] = bminor
+    return keys
 
 def get_tempo(spreadsheet):
     allegro = 0
@@ -330,15 +443,53 @@ collections.Counter(get_chord_pairs(charts_2013)) + collections.Counter(get_chor
 collections.Counter(get_chord_pairs(charts_2015)) + collections.Counter(get_chord_pairs(charts_2016)) + 
 collections.Counter(get_chord_pairs(charts_2017)) + collections.Counter(get_chord_pairs(charts_2018)) + 
 collections.Counter(get_chord_pairs(charts_2019)) + collections.Counter(get_chord_pairs(charts_2020)))
-
-
-
 all_chord_pairs_sort = sorted(all_chord_pairs.items(), key=operator.itemgetter(1)) 
-sortdict = dict(all_chord_pairs_sort)
+allchords_sortdict = dict(all_chord_pairs_sort)
+
+key_whole_dict = dict(collections.Counter(get_key_whole(charts_2011)) + collections.Counter(get_key_whole(charts_2012)) + 
+collections.Counter(get_key_whole(charts_2013)) + collections.Counter(get_key_whole(charts_2014)) + 
+collections.Counter(get_key_whole(charts_2015)) + collections.Counter(get_key_whole(charts_2016)) + 
+collections.Counter(get_key_whole(charts_2017)) + collections.Counter(get_key_whole(charts_2018)) + 
+collections.Counter(get_key_whole(charts_2019)) + collections.Counter(get_key_whole(charts_2020)))
+key_whole_sort = sorted(key_whole_dict.items(), key=operator.itemgetter(1)) 
+key_whole_sortdict = dict(key_whole_sort)
 
 print("deg Occurrences: " + str(occur_dict))
 print("tempo Occurrences: " + str(all_tempos_dict))
 print("average tempo: " + str(avg_tempo))
 print("Tonics: " + str(all_tonics))
 print("Key Qualities: " + str(all_qualities))
-print("Chord Pairs: " + str(all_chord_pairs_sort))
+print("Chord Pairs: " + str(allchords_sortdict))
+print("Key Whole: " + str(key_whole_sortdict))
+print("Tempo average 2011: " + str(get_tempo_avg(charts_2011)))
+print("Tempo average 2012: " + str(get_tempo_avg(charts_2012)))
+print("Tempo average 2013: " + str(get_tempo_avg(charts_2013)))
+print("Tempo average 2014: " + str(get_tempo_avg(charts_2014)))
+print("Tempo average 2015: " + str(get_tempo_avg(charts_2015)))
+print("Tempo average 2016: " + str(get_tempo_avg(charts_2016)))
+print("Tempo average 2017: " + str(get_tempo_avg(charts_2017)))
+print("Tempo average 2018: " + str(get_tempo_avg(charts_2018)))
+print("Tempo average 2019: " + str(get_tempo_avg(charts_2019)))
+print("Tempo average 2020: " + str(get_tempo_avg(charts_2020)))
+
+print("chord pairs 2011: " + str(dict(collections.Counter(get_chord_pairs(charts_2011)))))
+print("chord pairs 2012: " + str(dict(collections.Counter(get_chord_pairs(charts_2012)))))
+print("chord pairs 2013: " + str(dict(collections.Counter(get_chord_pairs(charts_2013)))))
+print("chord pairs 2014: " + str(dict(collections.Counter(get_chord_pairs(charts_2014)))))
+print("chord pairs 2015: " + str(dict(collections.Counter(get_chord_pairs(charts_2015)))))
+print("chord pairs 2016: " + str(dict(collections.Counter(get_chord_pairs(charts_2016)))))
+print("chord pairs 2017: " + str(dict(collections.Counter(get_chord_pairs(charts_2017)))))
+print("chord pairs 2018: " + str(dict(collections.Counter(get_chord_pairs(charts_2018)))))
+print("chord pairs 2019: " + str(dict(collections.Counter(get_chord_pairs(charts_2019)))))
+print("chord pairs 2020: " + str(dict(collections.Counter(get_chord_pairs(charts_2020)))))
+
+print("key qualities 2011: " + str(get_key_quality(charts_2011)))
+print("key qualities 2012: " + str(get_key_quality(charts_2012)))
+print("key qualities 2013: " + str(get_key_quality(charts_2013)))
+print("key qualities 2014: " + str(get_key_quality(charts_2014)))
+print("key qualities 2015: " + str(get_key_quality(charts_2015)))
+print("key qualities 2016: " + str(get_key_quality(charts_2016)))
+print("key qualities 2017: " + str(get_key_quality(charts_2017)))
+print("key qualities 2018: " + str(get_key_quality(charts_2018)))
+print("key qualities 2019: " + str(get_key_quality(charts_2019)))
+print("key qualities 2020: " + str(get_key_quality(charts_2020)))

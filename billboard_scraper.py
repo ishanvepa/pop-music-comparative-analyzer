@@ -62,28 +62,6 @@ def get_songs(html):
             songs[k] = songs[k][escape_char:]            
     return songs
 
-#manual musical data input --> retrieve and process
-
-def get_tonic(html):
-    songs_whole_index = []
-    songs_end_index = []
-    for k in range(10):
-        songs_end_index.insert(k, (findnth(html, "ye-chart-item__artist", k) - 20))
-        songs_end_index[k] = int(songs_end_index[k])
-        songs_whole_index.insert(k, (findnth(html, "ye-chart-item__title", k))) 
-        songs_whole_index[k] = int(songs_whole_index[k])
-    songs = []
-    #retrieve songs and format properly in list 
-    for k in range(10):
-        songs.insert(k, html[songs_whole_index[k]:songs_end_index[k]])        
-        
-        escape_char = songs[k].find("\n")
-        
-        while escape_char > 0:
-            escape_char = songs[k].find("\n") + 1
-            songs[k] = songs[k][escape_char:]            
-    return songs
-
 
 def write_data_xlsx(spreadsheet, dictionary):
     row = 0
@@ -132,10 +110,6 @@ for x in range(len(year_num)):
         "Rank" : rankings_list,
         "Song Title" : songs_list,
         "Artist" : artist_list#,
-       #"Chords" : chord_list,
-       #"Tempo" : tempo_list,
-       #"Tonic" : tonic_list,
-       #"Key" : key_list
     }
    
     worksheet = workbook.add_worksheet(str(year_num[x]) + " Charts")
